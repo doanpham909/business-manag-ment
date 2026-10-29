@@ -1,0 +1,32 @@
+/* Preflight của Tailwind đã tắt (tailwind.config.js) — reset dùng antd/dist/reset.css, import trong main.tsx */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Token màu của app. Các biến --color-* khác (bg-main, text-main, border...) do shared-ui/styles.css cung cấp.
+ * --color-primary trùng colorPrimary trong getAntTheme() của shared-ui.
+ */
+:root {
+  --color-primary: #00aaff;
+  --color-primary-rgb: 0 170 255;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg-main);
+  color: var(--color-text-main);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
