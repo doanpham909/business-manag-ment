@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Kiểu dữ liệu dùng chung (Result, PagedResult, envelope lỗi, hằng số).
+       KHÔNG phụ thuộc package/project nào khác. -->
+</Project>

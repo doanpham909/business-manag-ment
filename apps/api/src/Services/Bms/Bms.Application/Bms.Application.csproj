@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Application: CQRS command/query + handler + validator, theo thư mục module.
+       Chỉ phụ thuộc Domain + BuildingBlocks.Contracts/Shared.
+       Tham chiếu Microsoft.EntityFrameworkCore (chỉ core, không provider) để dùng async LINQ
+       (ToListAsync, CountAsync...) trên IQueryable từ repository — giống QMS. -->
+  <ItemGroup>
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bms.Domain\Bms.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Handler để internal; cho phép unit test truy cập -->
+    <InternalsVisibleTo Include="Bms.UnitTests" />
+  </ItemGroup>
+</Project>

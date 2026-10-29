@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- API host: composition root (DI), middleware pipeline, cấu hình.
+       Connection string có mật khẩu đặt bằng: dotnet user-secrets set "ConnectionStrings:Default" "..." -->
+  <PropertyGroup>
+    <UserSecretsId>bms-api-6f3c2a1e-4b7d-4e2a-9c51-0d8e7a3b2f10</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <!-- Cần cho `dotnet ef` (startup project); không ship ra runtime -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bms.Application\Bms.Application.csproj" />
+    <ProjectReference Include="..\Bms.Infrastructure\Bms.Infrastructure.csproj" />
+    <ProjectReference Include="..\Bms.Persistence\Bms.Persistence.csproj" />
+    <ProjectReference Include="..\Bms.Presentation\Bms.Presentation.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- DDD base types + abstractions (messaging, persistence, tenant/user context).
+       Đổi tên từ "Contacts" (typo của QMS) thành "Contracts".
+       Cố ý KHÔNG phụ thuộc EF Core / ASP.NET Core để Domain luôn "sạch". -->
+  <ItemGroup>
+    <PackageReference Include="MediatR" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks.Shared\BuildingBlocks.Shared.csproj" />
+  </ItemGroup>
+</Project>

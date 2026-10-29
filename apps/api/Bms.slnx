@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/BuildingBlocks.Contracts/BuildingBlocks.Contracts.csproj" />
+    <Project Path="src/BuildingBlocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj" />
+    <Project Path="src/BuildingBlocks/BuildingBlocks.Shared/BuildingBlocks.Shared.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/">
+    <Project Path="src/Services/Bms/Bms.API/Bms.API.csproj" />
+    <Project Path="src/Services/Bms/Bms.Application/Bms.Application.csproj" />
+    <Project Path="src/Services/Bms/Bms.Domain/Bms.Domain.csproj" />
+    <Project Path="src/Services/Bms/Bms.Infrastructure/Bms.Infrastructure.csproj" />
+    <Project Path="src/Services/Bms/Bms.Persistence/Bms.Persistence.csproj" />
+    <Project Path="src/Services/Bms/Bms.Presentation/Bms.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Bms.ArchitectureTests/Bms.ArchitectureTests.csproj" />
+    <Project Path="tests/Bms.UnitTests/Bms.UnitTests.csproj" />
+  </Folder>
+</Solution>

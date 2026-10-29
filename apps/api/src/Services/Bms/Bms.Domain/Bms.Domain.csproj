@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Domain: entity, value object, domain event, business rule — theo thư mục module:
+       Admin/ (Quản trị hệ thống), Inventory/ (Kho), Accounting/ (Kế toán), Projects/ (Quản lý dự án).
+       Chỉ được phụ thuộc BuildingBlocks.Contracts (đã kiểm tra bằng Bms.ArchitectureTests). -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Contracts\BuildingBlocks.Contracts.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Presentation: controller mỏng (chỉ map HTTP ↔ MediatR), thư mục Controllers/V1/{Module}/. -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bms.Application\Bms.Application.csproj" />
+  </ItemGroup>
+</Project>
