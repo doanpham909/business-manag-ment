@@ -1,0 +1,3 @@
+#!/bin/sh
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT" && npx --no-install commitlint --edit "$1"

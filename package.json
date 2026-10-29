@@ -1,0 +1,15 @@
+{
+  "name": "business-management-system",
+  "private": true,
+  "description": "Hệ thống quản lý doanh nghiệp (multi-tenant) — tooling dùng chung cho repo",
+  "scripts": {
+    "prepare": "git config core.hooksPath .husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

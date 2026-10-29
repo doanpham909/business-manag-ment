@@ -1,0 +1,19 @@
+#!/bin/sh
+# Chỉ kiểm tra phần có file được stage, để commit nhanh
+
+ROOT=$(git rev-parse --show-toplevel)
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR)
+
+# Frontend: lint + format các file đã stage
+if echo "$STAGED" | grep -q "^apps/web/"; then
+  (cd "$ROOT/apps/web" && npx --no-install lint-staged) || exit 1
+fi
+
+# Backend: kiểm tra định dạng code C# đã stage
+CS_FILES=$(echo "$STAGED" | grep "^apps/api/.*\.cs$" | sed 's#^apps/api/##')
+if [ -n "$CS_FILES" ]; then
+  (cd "$ROOT/apps/api" && dotnet format whitespace Bms.slnx --verify-no-changes --include $CS_FILES) || {
+    echo "C# chưa đúng định dạng. Chạy: cd apps/api && dotnet format Bms.slnx"
+    exit 1
+  }
+fi

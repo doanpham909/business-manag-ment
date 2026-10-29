@@ -68,6 +68,7 @@ web_modules/
 # dotenv environment variable files
 .env
 .env.*
+*.local
 !.env.example
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -147,3 +148,29 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# ---------------------------------------------------------------
+# .NET (apps/api)
+# ---------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userprefs
+.vs/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+appsettings.*.local.json
+
+# ---------------------------------------------------------------
+# IDE / OS
+# ---------------------------------------------------------------
+.idea/
+.DS_Store
+Thumbs.db
+
+# Playwright
+playwright-report/
+test-results/
