@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directory: /apps/api
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    ignore:
+      # MediatR từ v13 chuyển sang license thương mại — giữ v12
+      - dependency-name: MediatR
+        versions: [">=13.0.0"]
+    groups:
+      microsoft:
+        patterns: ["Microsoft.*", "System.*", "Npgsql*"]
+
+  - package-ecosystem: npm
+    directory: /apps/web
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
