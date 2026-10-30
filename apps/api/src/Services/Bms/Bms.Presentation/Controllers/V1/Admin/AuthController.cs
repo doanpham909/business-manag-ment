@@ -62,7 +62,7 @@ public sealed class AuthController(ISender sender) : ApiControllerBase(sender)
         if (result.IsFailure)
             return HandleFailure(result);
 
-        var session = result.Value;
+        var session = result.GetValueOrThrow();
         Response.Cookies.Append(RefreshCookie, session.RefreshToken,
             CookieOptions(DateTimeOffset.UtcNow.Add(AuthDefaults.RefreshTokenLifetime)));
         return Ok(Result.Success(new AuthResponse(session.AccessToken, session.ExpiresAt, session.Session)));

@@ -32,4 +32,27 @@ public sealed class BmsDbContextSqlTests
         Assert.Contains("is_deleted", sql);
         Assert.Contains("WHERE", sql);
     }
+
+    private sealed class CompanyDbContext(DbContextOptions options, FakeTenantContext tenant, FakeCompanyContext company)
+        : TenantDbContextBase(options, tenant, company)
+    {
+        protected override void ConfigureModel(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<CompanyIsolationTests.Voucher>();
+    }
+
+    [Fact]
+    public void Query_TranslatesCompanyFilterToSql()
+    {
+        var options = new DbContextOptionsBuilder()
+            .UseNpgsql("Host=localhost;Database=unit_test")
+            .UseSnakeCaseNamingConvention()
+            .Options;
+        using var db = new CompanyDbContext(
+            options, new FakeTenantContext(Guid.CreateVersion7()), new FakeCompanyContext(Guid.CreateVersion7()));
+
+        var sql = db.Set<CompanyIsolationTests.Voucher>().ToQueryString();
+
+        Assert.Contains("company_id", sql);
+        Assert.Contains("tenant_id", sql);
+    }
 }

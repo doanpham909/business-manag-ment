@@ -503,7 +503,7 @@ namespace Bms.Persistence.Migrations
                     b.ToTable("user_role_assignments", "admin");
                 });
 
-            modelBuilder.Entity("BuildingBlocks.Infrastructure.Auditing.AuditLog", b =>
+            modelBuilder.Entity("BuildingBlocks.Contracts.Auditing.AuditLog", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")

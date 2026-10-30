@@ -1,3 +1,4 @@
+using Bms.Domain.Admin.Catalogs;
 using Bms.Domain.Admin.Companies;
 using Bms.Domain.Admin.Roles;
 using Bms.Domain.Admin.Tenants;
@@ -111,5 +112,18 @@ internal sealed class RoleDataScopeConfiguration : IEntityTypeConfiguration<Role
         builder.Property(x => x.Module).HasMaxLength(50).IsRequired();
         builder.Property(x => x.Scope).HasConversion<string>().HasMaxLength(50);
         builder.HasIndex(x => new { x.RoleId, x.Module }).IsUnique();
+    }
+}
+
+internal sealed class CatalogItemConfiguration : IEntityTypeConfiguration<CatalogItem>
+{
+    public void Configure(EntityTypeBuilder<CatalogItem> builder)
+    {
+        builder.ToTable(TableNames.CatalogItems, TableNames.AdminSchema);
+        builder.Property(x => x.Type).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
+        builder.Property(x => x.Description).HasMaxLength(1000);
+        builder.HasIndex(x => new { x.TenantId, x.Type, x.Code }).IsUnique().HasFilter("is_deleted = false");
     }
 }

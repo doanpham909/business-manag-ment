@@ -1,8 +1,8 @@
 using System.Reflection;
 using System.Text.Json;
 using BuildingBlocks.Contracts.Abstractions;
+using BuildingBlocks.Contracts.Auditing;
 using BuildingBlocks.Contracts.Domain.Entities;
-using BuildingBlocks.Infrastructure.Auditing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;

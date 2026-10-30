@@ -6,6 +6,13 @@ public static class TableNames
     public const string SystemSchema = "system";
     public const string AuditLogs = "audit_logs";
     public const string RefreshTokens = "refresh_tokens";
+    public const string DocumentSequences = "document_sequences";
+
+    public const string HrmSchema = "hrm";
+    public const string Departments = "departments";
+
+    public const string ProjectsSchema = "projects";
+    public const string Projects = "projects";
 
     public const string AdminSchema = "admin";
     public const string Tenants = "tenants";
@@ -16,4 +23,5 @@ public static class TableNames
     public const string Roles = "roles";
     public const string RolePermissions = "role_permissions";
     public const string RoleDataScopes = "role_data_scopes";
+    public const string CatalogItems = "catalog_items";
 }

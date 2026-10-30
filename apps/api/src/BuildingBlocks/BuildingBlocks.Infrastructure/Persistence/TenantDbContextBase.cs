@@ -56,6 +56,10 @@ public abstract class TenantDbContextBase(
                 continue;
 
             UseClientGeneratedGuidKeys(entityType);
+
+            // Phiên bản chống sửa đè (CMN-10): uint + IsRowVersion → Npgsql ánh xạ cột hệ thống xmin
+            if (typeof(IVersioned).IsAssignableFrom(entityType.ClrType))
+                modelBuilder.Entity(entityType.ClrType).Property(nameof(IVersioned.Version)).IsRowVersion();
             ApplyFiltersMethod.MakeGenericMethod(entityType.ClrType).Invoke(this, [modelBuilder]);
         }
     }

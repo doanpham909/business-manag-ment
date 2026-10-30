@@ -19,6 +19,9 @@ public static class DependencyInjection
             .AddJsonOptions(options =>
                 // Giữ nguyên tiếng Việt có dấu trong JSON (không escape \uXXXX) — giống QMS
                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All))
+            .AddJsonOptions(options =>
+                // Enum dạng chuỗi ("Active"): đọc được và an toàn khi thêm giá trị
+                options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()))
             .ConfigureApiBehaviorOptions(options =>
                 options.InvalidModelStateResponseFactory = CreateModelStateErrorResponse);
 

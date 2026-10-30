@@ -1,6 +1,6 @@
 using Bms.UnitTests.Fakes;
+using BuildingBlocks.Contracts.Auditing;
 using BuildingBlocks.Contracts.Domain.Entities;
-using BuildingBlocks.Infrastructure.Auditing;
 using BuildingBlocks.Infrastructure.Interceptors;
 using BuildingBlocks.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

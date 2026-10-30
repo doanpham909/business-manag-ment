@@ -1,6 +1,7 @@
 using Bms.Domain.Common.Rules;
 using BuildingBlocks.Contracts.Domain.DDD;
 using BuildingBlocks.Contracts.Domain.Entities;
+using BuildingBlocks.Contracts.Persistence;
 
 namespace Bms.Domain.Admin.Users;
 
@@ -8,8 +9,10 @@ namespace Bms.Domain.Admin.Users;
 /// Tài khoản người dùng của tenant. Tên đăng nhập duy nhất toàn nền tảng (đăng nhập không nhập mã công ty).
 /// Người dùng vào được các công ty trong <see cref="CompanyAccesses"/>; vai trò gán theo từng công ty.
 /// </summary>
-public sealed class User : EventEntityAuditBase<Guid>, IAggregateRoot, ITenantEntity
+public sealed class User : EventEntityAuditBase<Guid>, IAggregateRoot, ITenantEntity, IVersioned
 {
+    public uint Version { get; private set; }
+
     private readonly List<UserCompanyAccess> _companyAccesses = [];
     private readonly List<UserRoleAssignment> _roleAssignments = [];
 

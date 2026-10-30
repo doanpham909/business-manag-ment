@@ -2,6 +2,7 @@ using Bms.Domain.Common.Rules;
 using BuildingBlocks.Contracts.Domain.DDD;
 using BuildingBlocks.Contracts.Domain.Entities;
 using BuildingBlocks.Contracts.Domain.Exceptions;
+using BuildingBlocks.Contracts.Persistence;
 
 namespace Bms.Domain.Admin.Companies;
 
@@ -9,8 +10,10 @@ namespace Bms.Domain.Admin.Companies;
 /// Công ty (pháp nhân) thuộc tenant — ADR-0002. Dữ liệu nghiệp vụ tách theo công ty.
 /// Công ty Ngừng hoạt động không chọn được để làm việc, không nhận dữ liệu mới (DEC-019).
 /// </summary>
-public sealed class Company : EventEntityAuditBase<Guid>, IAggregateRoot, ITenantEntity
+public sealed class Company : EventEntityAuditBase<Guid>, IAggregateRoot, ITenantEntity, IVersioned
 {
+    public uint Version { get; private set; }
+
     public Guid TenantId { get; private set; }
     public string Code { get; private set; } = string.Empty;
     public string Name { get; private set; } = string.Empty;

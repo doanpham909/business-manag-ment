@@ -2,6 +2,7 @@ using Bms.Domain.Common.Rules;
 using BuildingBlocks.Contracts.Domain.DDD;
 using BuildingBlocks.Contracts.Domain.Entities;
 using BuildingBlocks.Contracts.Domain.Exceptions;
+using BuildingBlocks.Contracts.Persistence;
 
 namespace Bms.Domain.Admin.Roles;
 
@@ -9,8 +10,10 @@ namespace Bms.Domain.Admin.Roles;
 /// Vai trò do tenant tự định nghĩa: tập quyền (mã permission) và phạm vi dữ liệu theo từng phân hệ.
 /// Vai trò được gán cho người dùng theo từng công ty (xem User.RoleAssignments).
 /// </summary>
-public sealed class Role : EventEntityAuditBase<Guid>, IAggregateRoot, ITenantEntity
+public sealed class Role : EventEntityAuditBase<Guid>, IAggregateRoot, ITenantEntity, IVersioned
 {
+    public uint Version { get; private set; }
+
     private readonly List<RolePermission> _permissions = [];
     private readonly List<RoleDataScope> _dataScopes = [];
 

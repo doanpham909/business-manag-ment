@@ -1,10 +1,10 @@
 using BuildingBlocks.Contracts.Domain.Entities;
 
-namespace BuildingBlocks.Infrastructure.Auditing;
+namespace BuildingBlocks.Contracts.Auditing;
 
 /// <summary>
 /// Nhật ký thay đổi dữ liệu (CMN-03): ai, khi nào, tenant/công ty nào, bản ghi nào, giá trị trước/sau.
-/// Do <see cref="Interceptors.AuditLogInterceptor"/> ghi tự động, không sửa, không xóa.
+/// Do AuditLogInterceptor (BuildingBlocks.Infrastructure) ghi tự động, không sửa, không xóa.
 /// </summary>
 public sealed class AuditLog : EntityBase<Guid>, ITenantEntity
 {
@@ -22,7 +22,7 @@ public sealed class AuditLog : EntityBase<Guid>, ITenantEntity
 
     private AuditLog() { }
 
-    internal static AuditLog Create(
+    public static AuditLog Create(
         Guid tenantId, Guid? companyId, Guid? userId, string entityType, string entityId,
         AuditAction action, string changes, DateTimeOffset occurredAt) => new()
         {

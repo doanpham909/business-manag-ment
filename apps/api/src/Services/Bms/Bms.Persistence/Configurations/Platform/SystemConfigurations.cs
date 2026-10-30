@@ -1,6 +1,6 @@
 using Bms.Domain.Admin.Auth;
 using Bms.Persistence.Constants;
-using BuildingBlocks.Infrastructure.Auditing;
+using BuildingBlocks.Contracts.Auditing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

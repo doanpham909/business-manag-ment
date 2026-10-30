@@ -38,6 +38,7 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork, EfUnitOfWork<BmsDbContext>>();
         services.AddScoped(typeof(IRepositoryBase<,>), typeof(BmsRepository<,>));
+        services.AddScoped<IDocumentNumberGenerator, Numbering.DocumentNumberGenerator>();
 
         // DB lỗi/không kết nối được → báo Unhealthy ở /health, không làm sập app
         services.AddHealthChecks().AddDbContextCheck<BmsDbContext>("database", tags: ["db"]);
