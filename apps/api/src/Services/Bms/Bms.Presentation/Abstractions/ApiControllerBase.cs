@@ -13,6 +13,7 @@ namespace Bms.Presentation.Abstractions;
 /// Thành công → 200 + Result envelope; thất bại (Result.Failure) → ErrorResponse cùng shape với global exception handler.
 /// </summary>
 [ApiController]
+[Microsoft.AspNetCore.Authorization.Authorize] // mặc định phải đăng nhập; endpoint công khai gắn [AllowAnonymous]
 [Produces("application/json")]
 public abstract class ApiControllerBase(ISender sender) : ControllerBase
 {

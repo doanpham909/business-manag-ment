@@ -13,6 +13,7 @@ namespace Bms.Presentation.Controllers.V1;
 public sealed class SystemController(ISender sender) : ApiControllerBase(sender)
 {
     /// <summary>Lấy tên ứng dụng, version, môi trường và giờ server (UTC).</summary>
+    [Microsoft.AspNetCore.Authorization.AllowAnonymous]
     [HttpGet("info")]
     [ProducesResponseType(typeof(Result<SystemInfoResponse>), StatusCodes.Status200OK)]
     public Task<IActionResult> GetInfo(CancellationToken cancellationToken)

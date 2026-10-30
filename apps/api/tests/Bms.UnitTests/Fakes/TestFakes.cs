@@ -19,6 +19,19 @@ internal sealed class FakeTenantContext(Guid? tenantId) : ITenantContext
     public Guid? TenantId { get; set; } = tenantId;
 }
 
+/// <summary>Công ty đang làm việc giả lập; readable = null khi dùng công ty đang làm việc.</summary>
+internal sealed class FakeCompanyContext(Guid? activeCompanyId, IReadOnlyList<Guid>? allCompanies = null) : ICompanyContext
+{
+    public Guid? ActiveCompanyId { get; set; } = activeCompanyId;
+
+    public IReadOnlyList<Guid>? AllCompanies { get; set; } = allCompanies;
+
+    public bool IsAllCompanies => AllCompanies is not null;
+
+    public IReadOnlyList<Guid> ReadableCompanyIds =>
+        AllCompanies ?? (ActiveCompanyId is { } id ? [id] : []);
+}
+
 /// <summary>User hiện tại giả lập.</summary>
 internal sealed class FakeCurrentUser(Guid? userId) : ICurrentUser
 {

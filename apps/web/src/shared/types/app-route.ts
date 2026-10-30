@@ -17,9 +17,12 @@ export interface AppRoute {
   page?: LazyPage
   children?: AppRoute[]
   hideInMenu?: boolean
+  /** Mã quyền cần có để thấy menu và vào trang (vd `inventory.warehouse.view`) */
+  permission?: string
 }
 
 /** Dữ liệu gắn vào `handle` của route để breadcrumb đọc qua useMatches(). */
 export interface RouteHandle {
   title: string
+  permission?: string
 }

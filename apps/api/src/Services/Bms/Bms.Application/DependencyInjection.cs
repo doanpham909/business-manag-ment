@@ -20,6 +20,7 @@ public static class DependencyInjection
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyReference.Assembly));
         services.AddValidatorsFromAssembly(AssemblyReference.Assembly, includeInternalTypes: true);
+        services.AddScoped<Admin.Auth.AuthSessionService>();
         return services;
     }
 }

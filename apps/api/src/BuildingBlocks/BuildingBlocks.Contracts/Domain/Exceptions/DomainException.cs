@@ -37,3 +37,9 @@ public abstract class AccessDeniedException(string message) : DomainException("A
 {
     public override string? Code => ErrorCodes.Forbidden;
 }
+
+/// <summary>HTTP 401 — chưa xác thực hoặc thông tin đăng nhập không đúng.</summary>
+public abstract class UnauthorizedException(string message) : DomainException("Unauthorized", message)
+{
+    public override string? Code => ErrorCodes.Unauthorized;
+}

@@ -16,7 +16,10 @@ namespace BuildingBlocks.Infrastructure.Persistence;
 /// - Khóa Guid: ValueGeneratedNever (Id do domain sinh bằng Guid.CreateVersion7()).
 /// Lớp con cấu hình model trong <see cref="ConfigureModel"/>.
 /// </summary>
-public abstract class TenantDbContextBase(DbContextOptions options, ITenantContext tenantContext)
+public abstract class TenantDbContextBase(
+    DbContextOptions options,
+    ITenantContext tenantContext,
+    ICompanyContext companyContext)
     : DbContext(options)
 {
     private static readonly MethodInfo ApplyFiltersMethod = typeof(TenantDbContextBase)
@@ -27,6 +30,12 @@ public abstract class TenantDbContextBase(DbContextOptions options, ITenantConte
     /// giá trị theo từng instance (mỗi request một tenant) — KHÔNG được thay bằng hằng số.
     /// </summary>
     public Guid? CurrentTenantId => tenantContext.TenantId;
+
+    /// <summary>
+    /// Các công ty được đọc (ADR-0002). Mảng rỗng khi chưa chọn công ty → entity ICompanyEntity
+    /// không trả bản ghi nào (fail-closed). Cũng được EF tham số hóa theo từng instance.
+    /// </summary>
+    public Guid[] CurrentReadableCompanyIds => [.. companyContext.ReadableCompanyIds];
 
     protected sealed override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -68,6 +77,13 @@ public abstract class TenantDbContextBase(DbContextOptions options, ITenantConte
             builder.HasQueryFilter(QueryFilterNames.Tenant,
                 entity => ((ITenantEntity)entity).TenantId == CurrentTenantId);
             builder.HasIndex(nameof(ITenantEntity.TenantId));
+        }
+
+        if (typeof(ICompanyEntity).IsAssignableFrom(typeof(TEntity)))
+        {
+            builder.HasQueryFilter(QueryFilterNames.Company,
+                entity => CurrentReadableCompanyIds.Contains(((ICompanyEntity)entity).CompanyId));
+            builder.HasIndex(nameof(ITenantEntity.TenantId), nameof(ICompanyEntity.CompanyId));
         }
 
         if (typeof(ISoftDelete).IsAssignableFrom(typeof(TEntity)))

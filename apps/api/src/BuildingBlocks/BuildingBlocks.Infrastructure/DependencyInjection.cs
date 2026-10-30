@@ -29,6 +29,8 @@ public static class DependencyInjection
     public static IServiceCollection AddEfInterceptors(this IServiceCollection services)
     {
         services.AddScoped<ISaveChangesInterceptor, TenantEntityInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, CompanyEntityInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, AuditLogInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, PublishDomainEventsInterceptor>();
         return services;

@@ -1,7 +1,8 @@
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { routeObjects } from '@/app/router/route-objects'
+import { useAuthStore } from '@/shared/auth/auth-store'
 import { renderRoutes } from '@/test/render-with-providers'
 
 // Dashboard gọi API thật → mock để test không phụ thuộc backend
@@ -15,6 +16,28 @@ vi.mock('@/features/dashboard/api/system-info-api', () => ({
 }))
 
 describe('MainLayout', () => {
+  beforeEach(() => {
+    // Phiên đã đăng nhập, đã chọn công ty (không gọi API refresh)
+    useAuthStore.setState({
+      initialized: true,
+      accessToken: 'token',
+      session: {
+        user: { id: 'u1', username: 'admin', fullName: 'Quản trị' },
+        companies: [{ id: 'c1', code: 'XD01', name: 'Công ty Demo' }],
+        currentCompany: { id: 'c1', code: 'XD01', name: 'Công ty Demo' },
+        allCompanies: false,
+        canViewAllCompanies: false,
+        permissions: []
+      }
+    })
+  })
+
+  it('chưa đăng nhập → chuyển sang trang đăng nhập', async () => {
+    useAuthStore.setState({ session: null, accessToken: null })
+    renderRoutes(routeObjects, '/kho')
+    expect(await screen.findByRole('button', { name: 'Đăng nhập' })).toBeInTheDocument()
+  })
+
   it('hiển thị menu đủ các module và dữ liệu trang Tổng quan', async () => {
     renderRoutes(routeObjects, '/')
 

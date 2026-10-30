@@ -1,6 +1,7 @@
 import { Menu } from 'antd'
 import { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router'
+import { hasPermission, useAuthStore } from '@/shared/auth/auth-store'
 import type { AppRoute } from '@/shared/types/app-route'
 import { buildMenuItems, findActiveMenuPath } from './menu-utils'
 
@@ -14,7 +15,11 @@ export function SidebarMenu({ routes, collapsed }: SidebarMenuProps) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  const items = useMemo(() => buildMenuItems(routes), [routes])
+  const session = useAuthStore((state) => state.session)
+  const items = useMemo(
+    () => buildMenuItems(routes, (permission) => hasPermission(session, permission)),
+    [routes, session]
+  )
   const activePath = findActiveMenuPath(routes, pathname)
   const selectedKey = activePath.at(-1)
 

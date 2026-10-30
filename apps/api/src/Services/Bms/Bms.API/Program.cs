@@ -1,4 +1,5 @@
 using Bms.API.Extensions;
+using Bms.API.Seeding;
 using Bms.Application;
 using Bms.Infrastructure;
 using Bms.Persistence;
@@ -28,7 +29,7 @@ try
     builder.Services
         .AddApplication()
         .AddPipelineBehaviors()
-        .AddInfrastructure()
+        .AddInfrastructure(builder.Configuration, builder.Environment)
         .AddPersistence(builder.Configuration)
         .AddPresentation()
         .AddGlobalExceptionHandler()
@@ -57,7 +58,12 @@ try
 
     app.UseCors(CorsExtensions.PolicyName);
 
-    // Phase 0 chưa có authentication; khi thêm JWT: app.UseAuthentication(); app.UseAuthorization();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    if (app.Environment.IsDevelopment())
+        await app.MigrateAndSeedDevelopmentDataAsync();
+
     app.MapAppHealthEndpoint("/health");
     app.MapControllers();
 

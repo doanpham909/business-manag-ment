@@ -14,7 +14,7 @@ const toLazy = (page: LazyPage) => async () => {
  */
 export function buildRouteObjects(routes: AppRoute[]): RouteObject[] {
   return routes.map((route): RouteObject => {
-    const handle: RouteHandle = { title: route.title }
+    const handle: RouteHandle = { title: route.title, permission: route.permission }
 
     if (route.children?.length) {
       const children = buildRouteObjects(route.children)

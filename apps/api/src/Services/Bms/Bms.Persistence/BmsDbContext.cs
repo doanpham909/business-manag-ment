@@ -12,8 +12,11 @@ namespace Bms.Persistence;
 /// - Mỗi entity có 1 IEntityTypeConfiguration trong Configurations/{Module}/ — tự nạp bên dưới.
 /// - DbSet: không bắt buộc; dùng IRepositoryBase&lt;TEntity, TKey&gt; hoặc Set&lt;TEntity&gt;().
 /// </summary>
-public sealed class BmsDbContext(DbContextOptions<BmsDbContext> options, ITenantContext tenantContext)
-    : TenantDbContextBase(options, tenantContext)
+public sealed class BmsDbContext(
+    DbContextOptions<BmsDbContext> options,
+    ITenantContext tenantContext,
+    ICompanyContext companyContext)
+    : TenantDbContextBase(options, tenantContext, companyContext)
 {
     protected override void ConfigureModel(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(typeof(BmsDbContext).Assembly);

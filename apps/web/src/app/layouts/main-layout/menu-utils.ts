@@ -4,15 +4,18 @@ import type { AppRoute } from '@/shared/types/app-route'
 type MenuItem = Required<MenuProps>['items'][number]
 
 /** Sinh item cho antd Menu từ cấu hình route; key = path để điều hướng trực tiếp khi click. */
-export function buildMenuItems(routes: AppRoute[]): MenuItem[] {
+export function buildMenuItems(routes: AppRoute[], canSee: (permission?: string) => boolean = () => true): MenuItem[] {
   return routes
-    .filter((route) => !route.hideInMenu)
+    .filter((route) => !route.hideInMenu && canSee(route.permission))
     .map((route) => {
-      const children = route.children ? buildMenuItems(route.children) : []
+      const children = route.children ? buildMenuItems(route.children, canSee) : []
+      // Nhóm không có trang riêng và không còn mục con nào được thấy → ẩn cả nhóm
+      if (route.children?.length && !children.length && !route.page) return null
       return children.length
         ? { key: route.path, icon: route.icon, label: route.title, children }
         : { key: route.path, icon: route.icon, label: route.title }
     })
+    .filter((item) => item !== null)
 }
 
 /** Path `routePath` có "chứa" URL hiện tại không ('/' chỉ khớp chính xác để không khớp mọi trang). */

@@ -104,7 +104,7 @@ public sealed class TenantDbContextTests
     }
 
     private sealed class TestDbContext(DbContextOptions options, FakeTenantContext tenant)
-        : TenantDbContextBase(options, tenant)
+        : TenantDbContextBase(options, tenant, new FakeCompanyContext(null))
     {
         protected override void ConfigureModel(ModelBuilder modelBuilder) => modelBuilder.Entity<Product>();
     }

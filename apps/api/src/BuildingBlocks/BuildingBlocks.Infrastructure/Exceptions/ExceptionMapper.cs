@@ -63,6 +63,7 @@ internal static class ExceptionMapper
     {
         var (status, type) = exception switch
         {
+            UnauthorizedException => (StatusCodes.Status401Unauthorized, "Unauthorized"),
             AccessDeniedException => (StatusCodes.Status403Forbidden, "Forbidden"),
             NotFoundException => (StatusCodes.Status404NotFound, "NotFound"),
             ConflictException => (StatusCodes.Status409Conflict, "Conflict"),

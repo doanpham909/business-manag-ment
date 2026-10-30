@@ -1,12 +1,16 @@
 import { ButtonComponent, TypographyComponent } from '@systemvci/shared-ui'
-import { Layout, Spin } from 'antd'
+import { Alert, Layout, Spin } from 'antd'
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { Outlet, useNavigation } from 'react-router'
 import { appRoutes } from '@/app/router/route-config'
 import { APP_NAME, APP_SHORT_NAME } from '@/shared/constants/app-info'
+import { useAuthStore } from '@/shared/auth/auth-store'
 import { AppBreadcrumb } from './app-breadcrumb'
+import { CompanySwitcher } from './company-switcher'
+import { PermissionGate } from './permission-gate'
 import { SidebarMenu } from './sidebar-menu'
 import { useLayoutStore } from './use-layout-store'
+import { UserMenu } from './user-menu'
 
 const { Sider, Header, Content } = Layout
 
@@ -15,6 +19,7 @@ export function MainLayout() {
   const { siderCollapsed, toggleSider } = useLayoutStore()
   // Đang tải chunk của trang kế tiếp (lazy route) → hiện spinner trên vùng nội dung
   const isNavigating = useNavigation().state === 'loading'
+  const readOnly = useAuthStore((state) => !!state.session?.allCompanies)
 
   return (
     <Layout className='h-screen'>
@@ -42,11 +47,25 @@ export function MainLayout() {
             onClick={toggleSider}
           />
           <AppBreadcrumb />
+          <div className='ms-auto flex items-center gap-2'>
+            <CompanySwitcher />
+            <UserMenu />
+          </div>
         </Header>
 
         <Content className='overflow-auto p-6'>
+          {readOnly && (
+            <Alert
+              type='info'
+              showIcon
+              className='mb-4'
+              message='Đang xem Tất cả công ty — chế độ chỉ xem. Chọn một công ty cụ thể để thêm hoặc sửa dữ liệu.'
+            />
+          )}
           <Spin spinning={isNavigating} delay={150}>
-            <Outlet />
+            <PermissionGate>
+              <Outlet />
+            </PermissionGate>
           </Spin>
         </Content>
       </Layout>

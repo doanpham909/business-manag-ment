@@ -18,4 +18,7 @@ public static class QueryFilterNames
 {
     public const string Tenant = "Tenant";
     public const string SoftDelete = "SoftDelete";
+
+    /// <summary>Lọc theo công ty được đọc (ADR-0002) cho entity ICompanyEntity.</summary>
+    public const string Company = "Company";
 }
