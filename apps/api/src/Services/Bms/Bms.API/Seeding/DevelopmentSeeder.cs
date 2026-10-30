@@ -78,7 +78,7 @@ public static class DevelopmentSeeder
         SeedCatalogs(db, tenant.Id);
         SeedOrganization(db, tenant.Id, companies[0].Id);
         await db.SaveChangesAsync();
-        app.Logger.LogInformation("Seeded development demo data (password for all demo users: {Password})", DemoPassword);
+        app.Logger.LogInformation("Seeded development demo data");
     }
 
     private static void SeedCatalogs(BmsDbContext db, Guid tenantId)
