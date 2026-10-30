@@ -27,7 +27,7 @@ describe('MainLayout', () => {
         currentCompany: { id: 'c1', code: 'XD01', name: 'Công ty Demo' },
         allCompanies: false,
         canViewAllCompanies: false,
-        permissions: []
+        permissions: ['admin.company.view', 'projects.project.view']
       }
     })
   })

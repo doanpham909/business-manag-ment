@@ -8,6 +8,7 @@ export const projectsRoutes: AppRoute[] = [
     path: ROUTE_PATHS.projects,
     title: 'Quản lý dự án',
     icon: <FolderKanban size={18} />,
-    page: () => import('./pages/projects-page')
+    permission: 'projects.project.view',
+    page: () => import('./pages/project-list-page')
   }
 ]

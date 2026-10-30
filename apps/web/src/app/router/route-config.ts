@@ -1,6 +1,7 @@
 import { accountingRoutes } from '@/features/accounting/accounting-routes'
 import { adminRoutes } from '@/features/admin/admin-routes'
 import { dashboardRoutes } from '@/features/dashboard/dashboard-routes'
+import { hrmRoutes } from '@/features/hrm/hrm-routes'
 import { inventoryRoutes } from '@/features/inventory/inventory-routes'
 import { projectsRoutes } from '@/features/projects/projects-routes'
 import type { AppRoute } from '@/shared/types/app-route'
@@ -12,6 +13,7 @@ import type { AppRoute } from '@/shared/types/app-route'
 export const appRoutes: AppRoute[] = [
   ...dashboardRoutes,
   ...adminRoutes,
+  ...hrmRoutes,
   ...inventoryRoutes,
   ...accountingRoutes,
   ...projectsRoutes
