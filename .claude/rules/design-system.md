@@ -46,6 +46,8 @@ Giống QMS: **`@systemvci/shared-ui`** (bộ component chung của công ty) + 
 
 Antd được dùng trực tiếp khi shared-ui chưa có: `InputNumber`, `Form` layout, `Row/Col`, `Card`, `Descriptions`, `Tooltip`, `Popover`, `Dropdown`, `Layout`, `Menu`.
 
+**Ngoại lệ duy nhất — lưới nhập liệu kiểu Excel:** dùng **AG Grid Community** (DEC-007) cho màn hình sửa ô hàng loạt: Bảng công, Bảng lương, Ngân sách, Kiểm kê, Kế hoạch dòng tiền. Chỉ import AG Grid qua một wrapper duy nhất `shared/components/editable-grid/`, theme theo biến màu của shared-ui. Bảng danh sách thường vẫn dùng `TableComponent`.
+
 Khi nâng phiên bản shared-ui, xem export mới trong `index.d.ts` của gói và cập nhật bảng này.
 
 ## Màu sắc, chữ, khoảng cách

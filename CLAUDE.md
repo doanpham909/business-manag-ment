@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 Hệ thống **quản lý doanh nghiệp** dạng SaaS multi-tenant (nhiều công ty dùng chung). Giao diện tiếng Việt.
-Module: Quản trị hệ thống (`admin`), Kho (`inventory`), Kế toán (`accounting`), Quản lý dự án (`projects`).
+Module: Quản trị hệ thống (`admin`), Tổ chức – Nhân sự (`hrm`), Chấm công – Tính lương (`payroll`), Tài chính – Kế toán (`accounting`), Kho (`inventory`), Quản lý dự án (`projects`). Một khách hàng (tenant) có nhiều công ty — xem ADR-0002.
 
 ## Repo
 

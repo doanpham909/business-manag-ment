@@ -2,7 +2,7 @@
 
 Hệ thống quản lý doanh nghiệp: ứng dụng web SaaS cho nhiều công ty (multi-tenant).
 
-**Module:** Quản trị hệ thống · Kho · Kế toán · Quản lý dự án
+**Module:** Quản trị hệ thống · Tổ chức – Nhân sự · Chấm công – Tính lương · Tài chính – Kế toán · Kho · Quản lý dự án
 
 | Phần | Công nghệ |
 |---|---|

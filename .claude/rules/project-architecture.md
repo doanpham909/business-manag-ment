@@ -19,8 +19,10 @@ Kiến trúc mô phỏng dự án QMS của công ty để đội dùng lại ki
 | Module | Mã (code, folder, schema DB, route FE) | Tên hiển thị |
 |---|---|---|
 | Quản trị hệ thống | `admin` | Quản trị hệ thống |
-| Kho | `inventory` | Kho |
-| Kế toán | `accounting` | Kế toán |
+| Tổ chức – Nhân sự | `hrm` | Tổ chức – Nhân sự |
+| Chấm công – Tính lương | `payroll` | Chấm công – Tính lương |
+| Tài chính – Kế toán | `accounting` | Tài chính – Kế toán |
+| Kho | `inventory` | Quản lý kho |
 | Quản lý dự án | `projects` | Quản lý dự án |
 
 Thêm module mới phải cập nhật bảng này.
